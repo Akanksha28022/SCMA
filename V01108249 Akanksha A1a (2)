@@ -1,0 +1,1756 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "id": "0532a361",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2024-06-16T10:15:49.396620Z",
+     "start_time": "2024-06-16T10:15:47.995969Z"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "import os, pandas as pd, numpy as np"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "id": "fd3e9cd0",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2024-06-16T10:15:50.841477Z",
+     "start_time": "2024-06-16T10:15:50.836891Z"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "os.chdir(\"C:\\\\Users\\\\USER\\\\Downloads\\\\DATA\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "id": "2c7b48a8",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2024-06-16T10:16:04.084743Z",
+     "start_time": "2024-06-16T10:15:52.236332Z"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "df=pd.read_csv(\"NSSO68.csv\",encoding=\"Latin-1\", low_memory=False)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "id": "550bbf03",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2024-06-16T10:16:05.280199Z",
+     "start_time": "2024-06-16T10:16:05.210652Z"
+    }
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>slno</th>\n",
+       "      <th>grp</th>\n",
+       "      <th>Round_Centre</th>\n",
+       "      <th>FSU_number</th>\n",
+       "      <th>Round</th>\n",
+       "      <th>Schedule_Number</th>\n",
+       "      <th>Sample</th>\n",
+       "      <th>Sector</th>\n",
+       "      <th>state</th>\n",
+       "      <th>State_Region</th>\n",
+       "      <th>...</th>\n",
+       "      <th>pickle_v</th>\n",
+       "      <th>sauce_jam_v</th>\n",
+       "      <th>Othrprocessed_v</th>\n",
+       "      <th>Beveragestotal_v</th>\n",
+       "      <th>foodtotal_v</th>\n",
+       "      <th>foodtotal_q</th>\n",
+       "      <th>state_1</th>\n",
+       "      <th>Region</th>\n",
+       "      <th>fruits_df_tt_v</th>\n",
+       "      <th>fv_tot</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>1</td>\n",
+       "      <td>4.10E+31</td>\n",
+       "      <td>1</td>\n",
+       "      <td>41000</td>\n",
+       "      <td>68</td>\n",
+       "      <td>10</td>\n",
+       "      <td>1</td>\n",
+       "      <td>2</td>\n",
+       "      <td>24</td>\n",
+       "      <td>242</td>\n",
+       "      <td>...</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0.000000</td>\n",
+       "      <td>1141.492400</td>\n",
+       "      <td>30.942394</td>\n",
+       "      <td>GUJ</td>\n",
+       "      <td>2</td>\n",
+       "      <td>12.000000</td>\n",
+       "      <td>154.18</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>2</td>\n",
+       "      <td>4.10E+31</td>\n",
+       "      <td>1</td>\n",
+       "      <td>41000</td>\n",
+       "      <td>68</td>\n",
+       "      <td>10</td>\n",
+       "      <td>1</td>\n",
+       "      <td>2</td>\n",
+       "      <td>24</td>\n",
+       "      <td>242</td>\n",
+       "      <td>...</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>17.500000</td>\n",
+       "      <td>1244.553500</td>\n",
+       "      <td>29.286153</td>\n",
+       "      <td>GUJ</td>\n",
+       "      <td>2</td>\n",
+       "      <td>333.000000</td>\n",
+       "      <td>484.95</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>3</td>\n",
+       "      <td>4.10E+31</td>\n",
+       "      <td>1</td>\n",
+       "      <td>41000</td>\n",
+       "      <td>68</td>\n",
+       "      <td>10</td>\n",
+       "      <td>1</td>\n",
+       "      <td>2</td>\n",
+       "      <td>24</td>\n",
+       "      <td>242</td>\n",
+       "      <td>...</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0.000000</td>\n",
+       "      <td>1050.315400</td>\n",
+       "      <td>31.527046</td>\n",
+       "      <td>GUJ</td>\n",
+       "      <td>2</td>\n",
+       "      <td>35.000000</td>\n",
+       "      <td>214.84</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>4</td>\n",
+       "      <td>4.10E+31</td>\n",
+       "      <td>1</td>\n",
+       "      <td>41000</td>\n",
+       "      <td>68</td>\n",
+       "      <td>10</td>\n",
+       "      <td>1</td>\n",
+       "      <td>2</td>\n",
+       "      <td>24</td>\n",
+       "      <td>242</td>\n",
+       "      <td>...</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>33.333333</td>\n",
+       "      <td>1142.591667</td>\n",
+       "      <td>27.834607</td>\n",
+       "      <td>GUJ</td>\n",
+       "      <td>2</td>\n",
+       "      <td>168.333333</td>\n",
+       "      <td>302.30</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>5</td>\n",
+       "      <td>4.10E+31</td>\n",
+       "      <td>1</td>\n",
+       "      <td>41000</td>\n",
+       "      <td>68</td>\n",
+       "      <td>10</td>\n",
+       "      <td>1</td>\n",
+       "      <td>2</td>\n",
+       "      <td>24</td>\n",
+       "      <td>242</td>\n",
+       "      <td>...</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>75.000000</td>\n",
+       "      <td>945.249500</td>\n",
+       "      <td>27.600713</td>\n",
+       "      <td>GUJ</td>\n",
+       "      <td>2</td>\n",
+       "      <td>15.000000</td>\n",
+       "      <td>148.00</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "<p>5 rows × 384 columns</p>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "   slno       grp  Round_Centre  FSU_number  Round  Schedule_Number  Sample  \\\n",
+       "0     1  4.10E+31             1       41000     68               10       1   \n",
+       "1     2  4.10E+31             1       41000     68               10       1   \n",
+       "2     3  4.10E+31             1       41000     68               10       1   \n",
+       "3     4  4.10E+31             1       41000     68               10       1   \n",
+       "4     5  4.10E+31             1       41000     68               10       1   \n",
+       "\n",
+       "   Sector  state  State_Region  ...  pickle_v  sauce_jam_v  Othrprocessed_v  \\\n",
+       "0       2     24           242  ...       0.0          0.0              0.0   \n",
+       "1       2     24           242  ...       0.0          0.0              0.0   \n",
+       "2       2     24           242  ...       0.0          0.0              0.0   \n",
+       "3       2     24           242  ...       0.0          0.0              0.0   \n",
+       "4       2     24           242  ...       0.0          0.0              0.0   \n",
+       "\n",
+       "   Beveragestotal_v  foodtotal_v  foodtotal_q  state_1  Region  \\\n",
+       "0          0.000000  1141.492400    30.942394      GUJ       2   \n",
+       "1         17.500000  1244.553500    29.286153      GUJ       2   \n",
+       "2          0.000000  1050.315400    31.527046      GUJ       2   \n",
+       "3         33.333333  1142.591667    27.834607      GUJ       2   \n",
+       "4         75.000000   945.249500    27.600713      GUJ       2   \n",
+       "\n",
+       "   fruits_df_tt_v  fv_tot  \n",
+       "0       12.000000  154.18  \n",
+       "1      333.000000  484.95  \n",
+       "2       35.000000  214.84  \n",
+       "3      168.333333  302.30  \n",
+       "4       15.000000  148.00  \n",
+       "\n",
+       "[5 rows x 384 columns]"
+      ]
+     },
+     "execution_count": 4,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.head()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "id": "2d35a4db",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2024-06-16T10:16:09.802843Z",
+     "start_time": "2024-06-16T10:16:09.648192Z"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "ARP = df[df['state_1']==\"ARP\"]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "id": "32725550",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2024-06-16T10:16:11.812225Z",
+     "start_time": "2024-06-16T10:16:11.783885Z"
+    }
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "soyabean_v         1680\n",
+       "soyabean_q         1680\n",
+       "Meals_School       1675\n",
+       "Meals_Employer     1660\n",
+       "Land_Leased_out    1598\n",
+       "                   ... \n",
+       "cauli_q               0\n",
+       "parwal_q              0\n",
+       "bhindi_q              0\n",
+       "chillig_q             0\n",
+       "fv_tot                0\n",
+       "Length: 384, dtype: int64"
+      ]
+     },
+     "execution_count": 6,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "ARP.isnull().sum().sort_values(ascending = False)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "id": "e4792270",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2024-06-16T10:16:13.989311Z",
+     "start_time": "2024-06-16T10:16:13.983296Z"
+    }
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Index(['slno', 'grp', 'Round_Centre', 'FSU_number', 'Round', 'Schedule_Number',\n",
+       "       'Sample', 'Sector', 'state', 'State_Region',\n",
+       "       ...\n",
+       "       'pickle_v', 'sauce_jam_v', 'Othrprocessed_v', 'Beveragestotal_v',\n",
+       "       'foodtotal_v', 'foodtotal_q', 'state_1', 'Region', 'fruits_df_tt_v',\n",
+       "       'fv_tot'],\n",
+       "      dtype='object', length=384)"
+      ]
+     },
+     "execution_count": 7,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.columns"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "id": "995fbd7d",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2024-06-16T10:20:50.710568Z",
+     "start_time": "2024-06-16T10:20:50.703352Z"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "ARP_new = ARP[['state_1', 'District', 'Sector','Region','State_Region','ricetotal_q','wheattotal_q','moong_q','Milktotal_q','chicken_q','bread_q','foodtotal_q','Beveragestotal_v','Meals_At_Home']]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "id": "c51a30c5",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2024-06-16T10:20:51.924641Z",
+     "start_time": "2024-06-16T10:20:51.915336Z"
+    }
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Meals_At_Home       3\n",
+       "state_1             0\n",
+       "District            0\n",
+       "Sector              0\n",
+       "Region              0\n",
+       "State_Region        0\n",
+       "ricetotal_q         0\n",
+       "wheattotal_q        0\n",
+       "moong_q             0\n",
+       "Milktotal_q         0\n",
+       "chicken_q           0\n",
+       "bread_q             0\n",
+       "foodtotal_q         0\n",
+       "Beveragestotal_v    0\n",
+       "dtype: int64"
+      ]
+     },
+     "execution_count": 9,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "ARP_new.isnull().sum().sort_values(ascending = False)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 10,
+   "id": "42af1fb2",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2024-06-16T10:20:53.377364Z",
+     "start_time": "2024-06-16T10:20:53.372637Z"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "ARP_clean =ARP_new.copy()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "id": "72563526",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2024-06-16T10:20:56.084026Z",
+     "start_time": "2024-06-16T10:20:56.078287Z"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "ARP_clean.loc[:, 'Meals_At_Home'] = ARP_clean['Meals_At_Home'].fillna(ARP_new['Meals_At_Home'].mean())"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 12,
+   "id": "5330a3c9",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2024-06-16T10:21:00.719814Z",
+     "start_time": "2024-06-16T10:21:00.711639Z"
+    }
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "state_1             False\n",
+       "District            False\n",
+       "Sector              False\n",
+       "Region              False\n",
+       "State_Region        False\n",
+       "ricetotal_q         False\n",
+       "wheattotal_q        False\n",
+       "moong_q             False\n",
+       "Milktotal_q         False\n",
+       "chicken_q           False\n",
+       "bread_q             False\n",
+       "foodtotal_q         False\n",
+       "Beveragestotal_v    False\n",
+       "Meals_At_Home       False\n",
+       "dtype: bool"
+      ]
+     },
+     "execution_count": 12,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "ARP_clean.isnull().any()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 13,
+   "id": "7c188e84",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2024-06-16T04:25:21.294749Z",
+     "start_time": "2024-06-16T04:25:21.291497Z"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "# Outlier Checking"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 14,
+   "id": "53723eaa",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2024-06-16T10:22:13.080162Z",
+     "start_time": "2024-06-16T10:22:12.710152Z"
+    },
+    "scrolled": true
+   },
+   "outputs": [
+    {
+     "data": {
+      "image/png": "iVBORw0KGgoAAAANSUhEUgAAAq8AAAIhCAYAAABg21M1AAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90bGliIHZlcnNpb24zLjguMCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy81sbWrAAAACXBIWXMAAA9hAAAPYQGoP6dpAAA+90lEQVR4nO3de1xVVf7/8fcR5AgIKKhchMRR8655N/w6QqUjll/RaZo0S8dsLK1JnaLULthXpTTNZvxqajNepovNLy85TGWUYpbUkI0z3jNH8gZUaNw0CFi/P3pwvh7BCyTss/H1fDz2o/Zaa6/zOeijx7vF2ns7jDFGAAAAgA00sLoAAAAA4EoRXgEAAGAbhFcAAADYBuEVAAAAtkF4BQAAgG0QXgEAAGAbhFcAAADYBuEVAAAAtkF4BQAAgG0QXgHUitWrV8vhcLgdzZs3V2xsrFJSUqwuzyU6Olrjx4+v9nVnz55VUlKS0tLSrnpNmZmZuvXWWxUcHCyHw6GpU6fWaB6Hw6GkpKSrWtv55s2bp02bNtX4+lOnTikpKUm7d++u8RxpaWlyOBy18ucAwDN5W10AgPpt1apV6tChg4wxys7O1pIlSzR8+HBt3rxZw4cPt7q8Gjt79qxmz54tSYqNjb2qc0+bNk2ffvqp/vznPyssLEzh4eE1mic9PV2RkZFXtbbzzZs3T7fffrsSEhJqdP2pU6c0e/ZsRUdH64YbbriqtQGovwivAGpVly5d1Lt3b9f50KFD1bRpU73++uu2Dq+1ae/everbt2+NQqExRt9//718fX3Vv3//q18cAFiMbQMA6lSjRo3k4+Ojhg0burWfPn1akydPVsuWLeXj46Of/exnmjVrloqLiyVJ33//vXr06KG2bdsqLy/PdV12drbCwsIUGxursrIySdL48ePVuHFj7du3TzfffLP8/f3VvHlzPfjggzp79uxlazx27JjGjh2rFi1ayOl0qmPHjlq4cKHKy8sl/fhr/ebNm0uSZs+e7doWcbntB5ebt+JX4F9++aXeeecd17yZmZkXndPhcOjBBx/USy+9pI4dO8rpdGrNmjWuvgu3DZw8eVK//e1vFRUVJR8fH0VEROj2229XTk6Oa0x+fr4eeeQRtW7dWj4+PmrZsqWmTp2qoqIit88tKirSmjVrXHWevwK9d+9ejRgxQk2bNlWjRo10ww03uOqq+K59+vSRJP3mN79xzVFR72effaY777xT0dHR8vX1VXR0tEaPHq2vvvrqkj/jK3Xw4EENHTpUfn5+atasme6//3797W9/YwsCYAOsvAKoVWVlZSotLZUxRjk5OVqwYIGKioo0ZswY15jvv/9ecXFxOnLkiGbPnq1u3bppx44dSk5O1u7du/X3v/9djRo10l//+lf16tVLEyZM0Pr161VeXq677rpLxhi9/vrr8vLycs35ww8/aNiwYZo0aZIef/xx7dy5U3PmzNFXX32lv/3tbxet95tvvlFMTIxKSkr0P//zP4qOjlZKSooeeeQRHTlyREuXLlV4eLjeffddDR06VPfee68mTpwoSa5AW9N5e/bsqfT0dI0cOVJt2rTR888/L0mX3TawadMm7dixQ0899ZTCwsLUokWLKsedPHlSffr00Q8//KCZM2eqW7duys3N1ZYtW3TmzBmFhobq7NmzGjRokE6cOOEas2/fPj311FPas2eP3n//fTkcDqWnp+umm25SXFycnnzySUlSYGCgJOnQoUOKiYlRixYt9Ic//EEhISF65ZVXNH78eOXk5CgxMVE9e/bUqlWr9Jvf/EZPPPGEbr31VklybXPIzMxU+/btdeeddyo4OFhZWVlatmyZ+vTpo/3796tZs2aX/JlcSk5OjgYNGqSGDRtq6dKlCg0N1auvvqoHH3ywxnMCqEMGAGrBqlWrjKRKh9PpNEuXLnUb+9JLLxlJ5q9//atb+3PPPWckmffee8/V9sYbbxhJZvHixeapp54yDRo0cOs3xphx48YZSebFF190a587d66RZD766CNXW6tWrcy4ceNc548//riRZD799FO3ax944AHjcDjMoUOHjDHGfPPNN0aSefrpp6/o53Gl81bUdOutt17RvJJMUFCQOX36dJV959c3YcIE07BhQ7N///6LzpecnGwaNGhgMjIy3NrffPNNI8m8/fbbrjZ/f3+3n12FO++80zidTnPs2DG39vj4eOPn52e+++47Y4wxGRkZRpJZtWrVZb9naWmpKSwsNP7+/m5/rtu2bTOSzLZt2y47R4XHHnvMOBwOs3v3brf2wYMHV3suAHWPbQMAatXatWuVkZGhjIwMvfPOOxo3bpymTJmiJUuWuMZs3bpV/v7+uv32292urfg1/AcffOBqu+OOO/TAAw/o0Ucf1Zw5czRz5kwNHjy4ys++66673M4rVnu3bdt20Xq3bt2qTp06qW/fvpVqMcZo69atl//SdTivJN10001q2rTpZce98847iouLU8eOHS86JiUlRV26dNENN9yg0tJS1/GLX/ziin+lvnXrVt18882Kiopyax8/frzOnj2r9PT0y85RWFioxx57TG3btpW3t7e8vb3VuHFjFRUV6cCBA5e9/lK2bdumzp07q3v37m7t5/82AIDnYtsAgFrVsWPHSjdsffXVV0pMTNTYsWPVpEkT5ebmKiwsTA6Hw+3aFi1ayNvbW7m5uW7tEyZM0LJly+Tj46Pf/e53VX6ut7e3QkJC3NrCwsIkqdJ858vNzVV0dHSl9oiIiMteeym1Na90+W0FFb755pvLPn0gJydHX375ZaU9yRW+/fbby35Obm5ulTVV57uOGTNGH3zwgZ588kn16dNHgYGBcjgcGjZsmM6dO3fZ6y9XX+vWrSu1V/z9AODZCK8A6ly3bt20ZcsWffHFF+rbt69CQkL06aefyhjjFmC//vprlZaWuu1vLCoq0t13363rr79eOTk5mjhxot56661Kn1FaWqrc3Fy3AJudnS1JlULt+UJCQpSVlVWp/dSpU5JU472WtTWvpEqh/2KaN2+uEydOXHJMs2bN5Ovrqz//+c8X7b+cn/pd8/LylJKSoqefflqPP/64q724uFinT5++7OdfSX0VfxfOV1UbAM/DtgEAda7iofQVNzjdfPPNKiwsrPTA+7Vr17r6K9x///06duyYNmzYoD/96U/avHmzXnjhhSo/59VXX3U7f+211yRd+rmsN998s/bv36/PP/+8Ui0Oh0NxcXGSJKfTKUlXvAp4pfPWpvj4eG3btk2HDh266JjbbrtNR44cUUhIiHr37l3pOH/12Ol0Vvn9b775Zm3dutUVViusXbtWfn5+rkd4Xexn6HA4ZIxx9Vd4+eWXXU+U+Cni4uK0b98+/etf/3Jrr/j7AcDDWbvlFkB9VXHD1qpVq0x6erpJT083KSkpZsKECUaSGTlypGvsuXPnTLdu3UxAQIBZtGiRSU1NNU8//bRp2LChGTZsmGvcypUrK93g8+CDD5qGDRu63Qg1btw44+PjY6677jozd+5c895775mkpCTj7e1t4uPj3eq88Iatr7/+2rRs2dKEhYWZFStWmC1btpjf/e53xuFwmMmTJ1e6tn379mbLli0m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McIVUOfPn69FixZpyZIlysjIUFhYmAYPHqyCggIrywaAOud0OlVSUiJJCg8P19q1axUeHi5JKikpIcACuGY4jDHG6iLOFxwcrAULFmjChAmKiIjQ1KlT9dhjj0mSiouLFRoaqueee06TJk26ovny8/MVFBSkvLw8BQYG1mbpAFArTp48qcjISElSbm6ugoODXX2nT59WSEiIJOnEiRNq2bKlJTUCwE9RnbzmMXtey8rKtG7dOhUVFenGG2/U0aNHlZ2drSFDhrjGOJ1ODRo0SDt37rzoPMXFxcrPz3c7AMDOunbtKunHFdfzg6v04//wh4WFuY0DgPrM8vC6Z88eNW7cWE6nU/fff782btyoTp06KTs7W5IUGhrqNj40NNTVV5Xk5GQFBQW5jqioqFqtHwBqW8VWqeeee67K/jlz5riNA4D6zPLw2r59e+3evVuffPKJHnjgAY0bN0779+939TscDrfxxphKbeebMWOG8vLyXMfx48drrXYAqAsBAQGS5NpCdaEnnnjCbRwA1GeWh1cfHx+1bdtWvXv3VnJysrp3764XX3zR9WuwC1dZv/7660qrsedzOp2upxdUHABgZ3v27JEkZWVl6fTp0259p0+fdv13smIcANRnlofXCxljVFxcrNatWyssLEypqamuvpKSEm3fvl0xMTEWVggAdatly5by8fGRJIWEhCg8PFx/+tOfFB4e7rpZy8fHh5u1AFwTvK388JkzZyo+Pl5RUVEqKCjQunXrlJaWpnfffVcOh0NTp07VvHnz1K5dO7Vr107z5s2Tn5+fxowZY2XZAFDniouLXY/Lys7O1sSJE119Pj4+Ki4utrA6AKg7lobXnJwc3X333crKylJQUJC6deumd999V4MHD5YkJSYm6ty5c5o8ebLOnDmjfv366b333mNfF4BrUnFxsU6ePKmuXbuqoKBAAQEB2rNnDyuuAK4pHvec16uN57wCAAB4Nls+5xUAAAC4HMIrAAAAbIPwCgAAANuw9IYtAED1lJSUaOnSpTpy5IjatGmjyZMnux6jBQDXAsIrANhEYmKiXnjhBZWWlrraHn30UU2bNk3z58+3sDIAqDtsGwAAG0hMTNSCBQsUEhKilStXKisrSytXrlRISIgWLFigxMREq0sEgDrBo7IAwMOVlJTI399fISEhOnHihLy9/++XZqWlpYqMjFRubq6K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FRVVq3UCAACg7nhseK3gcDjczo0xldrON2PGDOXl5bmO48eP13aJAAAAqCOW7nm9lLCwMEk/rsCGh4e72r/++utKq7HnczqdcjqdtV4fAAAA6p7Hrry2bt1aYWFhSk1NdbWVlJRo+/btiomJsbAyAAAAWMXSldfCwkJ9+eWXrvOjR49q9+7dCg4O1nXXXaepU6dq3rx5ateundq1a6d58+bJz89PY8aMsbBqAAAAWMXS8PrZZ58pLi7OdT59+nRJ0rhx47R69WolJibq3Llzmjx5ss6cOaN+/frpvffeU0BAgFUlAwAAwEKWhtfY2FgZYy7a73A4lJSUpKSkpLorCgAAAB7LY/e8AgAAABcivAIAAMA2CK8AAACwDcIrAAAAbIPwCgAAANvw2DdsAUBtO3v2rCTp888/t7iS6jl37pwyMzMVHR0tX19fq8uplgMHDlhdAgCbI7wCuGYdPHhQknTfffdZXMm1h+d1A6gpwiuAa1ZCQoIkqUOHDvLz87O2mGo4cOCAxo4dq1deeUUdO3a0upxqCwgIULt27awuA4BNEV4BXLOaNWumiRMnWl1GjXXs2FE9e/a0ugwAqFPcsAUAAADbILwCAADANgivAAAAsA3CKwAAAGyD8AoAAADbILwCAADANgivAAAAsA3CKwAAAGyD8AoAAADbILwCAADANgivAAAAsA3CKwAAAGyD8AoAAADbILwCAADANgivAAAAsA3CKwAAAGyD8AoAAADbILwCAADANgivAAAAsA3CKwAAAGyD8AoAAADbILwCAADANgivAAAAsA3CKwAAAGyD8AoAAADbILwCAADANgivAAAAsA3CKwAAAGyD8AoAAADbILwCAADANgivAAAAsA3CKwAAAGzDo8NrUlKSHA6H2xEWFmZ1WQAAALCIt9UFXE7nzp31/vvvu869vLwsrAYAAABW8vjw6u3tzWorAAAAJHn4tgFJOnz4sCIiItS6dWvdeeed+s9//nPJ8cXFxcrPz3c7AAAAUD94dHjt16+f1q5dqy1btmjlypXKzs5WTEyMcnNzL3pNcnKygoKCXEdUVFQdVgwAAIDa5DDGGKuLuFJFRUVq06aNEhMTNX369CrHFBcXq7i42HWen5+vqKgo5eXlKTAwsK5KBYBa8/nnn6tXr17atWuXevbsaXU5APCT5efnKygo6IrymsfveT2fv7+/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",
+      "text/plain": [
+       "<Figure size 800x600 with 1 Axes>"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    }
+   ],
+   "source": [
+    "import matplotlib.pyplot as plt\n",
+    "# Assuming ARP_clean is your DataFrame\n",
+    "plt.figure(figsize=(8, 6))\n",
+    "plt.boxplot(ARP_clean['ricetotal_q'])\n",
+    "plt.xlabel('ricetotal_q')\n",
+    "plt.ylabel('Values')\n",
+    "plt.title('Boxplot of ricetotal_q')\n",
+    "plt.show()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 15,
+   "id": "adbfd8ac",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2024-06-16T10:22:31.063124Z",
+     "start_time": "2024-06-16T10:22:31.055234Z"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "rice1 = ARP_clean['ricetotal_q'].quantile(0.25)\n",
+    "rice2 = ARP_clean['ricetotal_q'].quantile(0.75)\n",
+    "iqr_rice = rice2-rice1\n",
+    "up_limit = rice2 + 1.5*iqr_rice\n",
+    "low_limit = rice1 - 1.5*iqr_rice"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 16,
+   "id": "0ae50df0",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2024-06-16T10:22:43.643572Z",
+     "start_time": "2024-06-16T10:22:43.634294Z"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "ARP_clean=ARP_new[(ARP_new['ricetotal_q']<=up_limit)&(ARP_new['ricetotal_q']>=low_limit)]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 17,
+   "id": "bb56d36d",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2024-06-16T10:23:15.268648Z",
+     "start_time": "2024-06-16T10:23:15.119902Z"
+    }
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "{'whiskers': [<matplotlib.lines.Line2D at 0x22132a4a7d0>,\n",
+       "  <matplotlib.lines.Line2D at 0x22132a4b3d0>],\n",
+       " 'caps': [<matplotlib.lines.Line2D at 0x22132a5c110>,\n",
+       "  <matplotlib.lines.Line2D at 0x22121a8c7d0>],\n",
+       " 'boxes': [<matplotlib.lines.Line2D at 0x22132a49c50>],\n",
+       " 'medians': [<matplotlib.lines.Line2D at 0x22132a5d310>],\n",
+       " 'fliers': [<matplotlib.lines.Line2D at 0x22132a5dd50>],\n",
+       " 'means': []}"
+      ]
+     },
+     "execution_count": 17,
+     "metadata": {},
+     "output_type": "execute_result"
+    },
+    {
+     "data": {
+      "image/png": "iVBORw0KGgoAAAANSUhEUgAAAh8AAAGgCAYAAAAKKQXsAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90bGliIHZlcnNpb24zLjguMCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy81sbWrAAAACXBIWXMAAA9hAAAPYQGoP6dpAAAVLElEQVR4nO3dbYhchdnw8Ws0ON3VcSWk+4brJpSULLV4kyja2JqkYHA/5GlMW2wlJYFaLEZBgkjT4N21xSwIT/BDqNzth6iEVL+0VlCMKSWJxVp0VVrsRhO6wS3JIgbd2STLBus8H3wyd7eJL5PMXpPZ/H5w0POy51zxy/49czKnUKlUKgEAkOSiRg8AAFxYxAcAkEp8AACpxAcAkEp8AACpxAcAkEp8AACpxAcAkEp8AACpxAcAkKqm+BgcHIzrrrsuSqVStLe3x+rVq+Ott96adsz69eujUChMW2644Ya6Dg0ANK85tRy8d+/e2LBhQ1x33XXx4YcfxubNm2PlypXx97//PS699NLqcbfcckts3769un7JJZd87mt89NFHcfjw4SiVSlEoFGoZDwBokEqlEhMTE9Hd3R0XXfTp9zZqio/nn39+2vr27dujvb09hoaG4qabbqpuLxaL0dnZWcupqw4fPhw9PT1n9bMAQGONjo7GlVde+anH1BQf/2l8fDwiIubOnTtt+549e6K9vT2uuOKKWLZsWTz00EPR3t5+xnNMTU3F1NRUdf3US3ZHR0fj8ssvP5fxAIAk5XI5enp6olQqfeaxhcqp3/Y1qlQq8a1vfSvef//9ePHFF6vbn3rqqbjsssuit7c3RkZG4oEHHogPP/wwhoaGolgsnnaegYGBePDBB0/bPj4+Lj4AoEmUy+Voa2v7XL+/zzo+NmzYEM8++2z86U9/+tTbK0eOHIne3t548sknY82aNaft/887H6fKSXwAQPOoJT7O6mOXe+65J5555pnYt2/fZ36u09XVFb29vXHgwIEz7i8Wi2e8IwIAzE41xUelUol77rknfve738WePXtiwYIFn/kzR48ejdHR0ejq6jrrIQGA2aOm7/nYsGFD7NixI3bu3BmlUinGxsZibGwsJicnIyLi2LFjcd9998Wf//znOHToUOzZsydWrVoV8+bNi1tvvXVG/gAAQHOp6ZmPT/reje3bt8f69etjcnIyVq9eHa+//np88MEH0dXVFStWrIhf/OIXn/uvz9bymREAcH6YsWc+PqtTWlpaYteuXbWcEgC4wHi3CwCQSnwAAKnEBwCQSnwAAKnEBwCQSnwAAKnO6a22wIXhxIkTsX///nM+z+TkZBw6dCjmz58fLS0tdZgsYtGiRdHa2lqXcwE5xAfwmfbv3x9Llixp9BhnNDQ0FIsXL270GEANxAfwmRYtWhRDQ0PnfJ7h4eFYu3Zt7NixI/r6+uow2cezAc1FfACfqbW1ta53F/r6+tytgAuYB04BgFTiAwBIJT4AgFTiAwBIJT4AgFTiAwBIJT4AgFTiAwBIJT4AgFTiAwBIJT4AgFTiAwBIJT4AgFTiAwBIJT4AgFTiAwBIJT4AgFTiAwBIJT4AgFTiAwBIJT4AgFTiAwBIJT4AgFTiAwBIJT4AgFTiAwBIJT4AgFTiAwBIJT4AgFTiAwBIJT4AgFTiAwBIJT4AgFTiAwBIJT4AgFTiAwBIJT4AgFTiAwBIJT4AgFTiAwBIJT4AgFTiAwBIJT4AgFTiAwBIJT4AgFTiAwBIJT4AgFTiAwBIJT4AgFQ1xcfg4GBcd911USqVor29PVavXh1vvfXWtGMqlUoMDAxEd3d3tLS0xPLly+PNN9+s69AAQPOqKT727t0bGzZsiJdffjl2794dH374YaxcuTKOHz9ePebhhx+OrVu3xrZt2+KVV16Jzs7OuPnmm2NiYqLuwwMAzWdOLQc///zz09a3b98e7e3tMTQ0FDfddFNUKpV45JFHYvPmzbFmzZqIiHj88cejo6Mjdu7cGXfeeWf9JgcAmtI5PfMxPj4eERFz586NiIiRkZEYGxuLlStXVo8pFouxbNmyeOmll854jqmpqSiXy9MWAGD2Ouv4qFQqsXHjxvj6178eV199dUREjI2NRURER0fHtGM7Ojqq+/7T4OBgtLW1VZeenp6zHQkAaAJnHR933313/PWvf43f/OY3p+0rFArT1iuVymnbTtm0aVOMj49Xl9HR0bMdCQBoAjU983HKPffcE88880zs27cvrrzyyur2zs7OiPj4DkhXV1d1+7vvvnva3ZBTisViFIvFsxkDAGhCNd35qFQqcffdd8dvf/vb+OMf/xgLFiyYtn/BggXR2dkZu3fvrm47efJk7N27N5YuXVqfiQGAplbTnY8NGzbEzp074/e//32USqXqcxxtbW3R0tIShUIh7r333tiyZUssXLgwFi5cGFu2bInW1ta4/fbbZ+QPAAA0l5ri49FHH42IiOXLl0/bvn379li/fn1ERNx///0xOTkZd911V7z//vtx/fXXxwsvvBClUqkuAwMAza2m+KhUKp95TKFQiIGBgRgYGDjbmQCAWcy7XQCAVOIDAEglPgCAVOIDAEglPgCAVOIDAEglPgCAVOIDAEglPgCAVOIDAEglPgCAVOIDAEglPgCAVOIDAEglPgCAVOIDAEglPgCAVOIDAEglPgCAVOIDAEglPgCAVOIDAEglPgCAVOIDAEglPgCAVOIDAEglPgCAVOIDAEglPgCAVOIDAEglPgCAVOIDAEglPgCAVOIDAEglPgCAVOIDAEglPgCAVOIDAEglPgCAVOIDAEglPgCAVOIDAEglPgCAVOIDAEglPgCAVOIDAEglPgCAVOIDAEglPgCAVOIDAEglPgCAVOIDAEglPgCAVOIDAEglPgCAVOIDAEglPgCAVOIDAEglPgCAVDXHx759+2LVqlXR3d0dhUIhnn766Wn7169fH4VCYdpyww031GteAKDJ1Rwfx48fj2uuuSa2bdv2icfccsstceTIkery3HPPndOQAMDsMafWH+jv74/+/v5PPaZYLEZnZ+dZDwUAzF41x8fnsWfPnmhvb48rrrgili1bFg899FC0t7ef8dipqamYmpqqrpfL5ZkYCS5IBw4ciImJiUaPUTU8PDztn+eTUqkUCxcubPQYcEGoe3z09/fHd7/73ejt7Y2RkZF44IEH4pvf/GYMDQ1FsVg87fjBwcF48MEH6z0GXPAOHDgQX/7ylxs9xhmtXbu20SOc0dtvvy1AIEHd4+O2226r/vvVV18d1157bfT29sazzz4ba9asOe34TZs2xcaNG6vr5XI5enp66j0WXHBO3fHYsWNH9PX1NXiaj01OTsahQ4di/vz50dLS0uhxqoaHh2Pt2rXn1V0imM1m5GOXf9fV1RW9vb1x4MCBM+4vFotnvCMC1EdfX18sXry40WNU3XjjjY0eAWiwGf+ej6NHj8bo6Gh0dXXN9KUAgCZQ852PY8eOxcGDB6vrIyMj8cYbb8TcuXNj7ty5MTAwEN/+9rejq6srDh06FD/96U9j3rx5ceutt9Z1cACgOdUcH6+++mqsWLGiun7qeY1169bFo48+Gn/729/iiSeeiA8++CC6urpixYoV8dRTT0WpVKrf1ABA06o5PpYvXx6VSuUT9+/ateucBgIAZjfvdgEAUokPACCV+AAAUokPACCV+AAAUokPACCV+AAAUokPACCV+AAAUokPACCV+AAAUokPACCV+AAAUokPACCV+AAAUokPACCV+AAAUokPACCV+AAAUokPACCV+AAAUokPACCV+AAAUokPACCV+AAAUokPACCV+AAAUokPACCV+AAAUokPACCV+AAAUokPACCV+AAAUokPACCV+AAAUokPACCV+AAAUokPACCV+AAAUokPACCV+AAAUokPACCV+AAAUokPACCV+AAAUs1p9ADAzOm8rBAtH7wdcdj/Z3yalg/ejs7LCo0eAy4Y4gNmsTuXXBJ9++6M2NfoSc5vffHxfysgh/iAWex/hk7Gbf/9WPQtWtToUc5rw/v3x//839vj/zR6ELhAiA+YxcaOVWLyii9HdP9Xo0c5r02OfRRjxyqNHgMuGD4IBgBSiQ8AIJX4AABSiQ8AIJX4AABSiQ8AIJX4AABSiQ8AIJX4AABSiQ8AIFXN8bFv375YtWpVdHd3R6FQiKeffnra/kqlEgMDA9Hd3R0tLS2xfPnyePPNN+s1LwDQ5GqOj+PHj8c111wT27ZtO+P+hx9+OLZu3Rrbtm2LV155JTo7O+Pmm2+OiYmJcx4WAGh+Nb9Yrr+/P/r7+8+4r1KpxCOPPBKbN2+ONWvWRETE448/Hh0dHbFz58648847z21aAKDp1fWZj5GRkRgbG4uVK1dWtxWLxVi2bFm89NJLZ/yZqampKJfL0xYAYPaqa3yMjY1FRERHR8e07R0dHdV9/2lwcDDa2tqqS09PTz1HAgDOMzPyt10KhcK09Uqlctq2UzZt2hTj4+PVZXR0dCZGAgDOEzU/8/FpOjs7I+LjOyBdXV3V7e++++5pd0NOKRaLUSwW6zkGAHAeq+udjwULFkRnZ2fs3r27uu3kyZOxd+/eWLp0aT0vBQA0qZrvfBw7diwOHjxYXR8ZGYk33ngj5s6dG1dddVXce++9sWXLlli4cGEsXLgwtmzZEq2trXH77bfXdXAAoDnVHB+vvvpqrFixorq+cePGiIhYt25dPPbYY3H//ffH5ORk3HXXXfH+++/H9ddfHy+88EKUSqX6TQ0ANK2a42P58uVRqVQ+cX+hUIiBgYEYGBg4l7kAgFnKu10AgFTiAwBIJT4AgFTiAwBIJT4AgFTiAwBIJT4AgFTiAwBIJT4AgFTiAwBIJT4AgFTiAwBIJT4AgFTiAwBIJT4AgFTiAwBINafRAwAz48SJExER8dprrzV4kv81OTkZhw4divnz50dLS0ujx6kaHh5u9AhwQREfMEvt378/IiJ+9KMfNXiS5lEqlRo9AlwQxAfMUqtXr46IiEWLFkVra2tjh/n/hoeHY+3atbFjx47o6+tr9DjTlEqlWLhwYaPHgAuC+IBZat68eXHHHXc0eowz6uvri8WLFzd6DKBBPHAKAKQSHwBAKvEBAKQSHwBAKvEBAKQSHwBAKvEBAKQSHwBAKvEBAKQSHwBAKvEBAKQSHwBAKvEBAKQSHwBAKvEBAKQSHwBAKvEBAKQSHwBAKvEBAKQSHwBAKvEBAKQSHwBAKvEBAKQSHwBAKvEBAKQSHwBAKvEBAKQSHwBAKvEBAKQSHwBAKvEBAKQSHwBAKvEBAKQSHwBAKvEBAKQSHwBAKvEBAKQSHwBAKvEBAKSqe3wMDAxEoVCYtnR2dtb7MgBAk5ozEyf9yle+En/4wx+q6xdffPFMXAYAaEIzEh9z5sxxtwMAOKMZeebjwIED0d3dHQsWLIjvfe978Y9//OMTj52amopyuTxtAQBmr7rHx/XXXx9PPPFE7Nq1K37961/H2NhYLF26NI4ePXrG4wcHB6Otra269PT01HskAOA8UqhUKpWZvMDx48fjS1/6Utx///2xcePG0/ZPTU3F1NRUdb1cLkdPT0+Mj4/H5ZdfPpOjAclee+21WLJkSQwNDcXixYsbPQ5QR+VyOdra2j7X7+8Zeebj31166aXx1a9+NQ4cOHDG/cViMYrF4kyPAQCcJ2b8ez6mpqZieHg4urq6ZvpSAEATqHt83HfffbF3794YGRmJv/zlL/Gd73wnyuVyrFu3rt6XAgCaUN0/dvnnP/8Z3//+9+O9996LL37xi3HDDTfEyy+/HL29vfW+FADQhOoeH08++WS9TwkAzCLe7QIApBIfAEAq8QEApBIfAEAq8QEApBIfAEAq8QEApBIfAEAq8QEApBIfAEAq8QEApBIfAEAq8QEApBIfAEAq8QEApBIfAEAq8QEApBIfAEAq8QEApBIfAEAq8QEApBIfAEAq8QEApBIfAEAq8QEApBIfAEAq8QEApBIfAEAq8QEApBIfAEAq8QEApBIfAEAq8QEApBIfAEAq8QEApBIfAEAq8QEApBIfAEAq8QEApBIfAEAq8QEApBIfAEAq8QEApBIfAEAq8QEApBIfAEAq8QEApBIfAEAq8QEApBIfAEAq8QEApBIfAEAq8QEApBIfAEAq8QEApBIfAEAq8QEApBIfAEAq8QEApJqx+PjlL38ZCxYsiC984QuxZMmSePHFF2fqUgBAE5mR+Hjqqafi3nvvjc2bN8frr78e3/jGN6K/vz/eeeedmbgcANBEZiQ+tm7dGj/84Q/jjjvuiL6+vnjkkUeip6cnHn300Zm4HADQRObU+4QnT56MoaGh+MlPfjJt+8qVK+Oll1467fipqamYmpqqrpfL5XqPBJyjEydOxP79+8/5PMPDw9P+WQ+LFi2K1tbWup0PmHl1j4/33nsv/vWvf0VHR8e07R0dHTE2Nnba8YODg/Hggw/Wewygjvbv3x9Lliyp2/nWrl1bt3MNDQ3F4sWL63Y+YObVPT5OKRQK09Yrlcpp2yIiNm3aFBs3bqyul8vl6OnpmamxgLOwaNGiGBoaOufzTE5OxqFDh2L+/PnR0tJSh8k+ng1oLnWPj3nz5sXFF1982l2Od99997S7IRERxWIxisVivccA6qi1tbVudxduvPHGupwHaF51f+D0kksuiSVLlsTu3bunbd+9e3csXbq03pcDAJrMjHzssnHjxvjBD34Q1157bXzta1+LX/3qV/HOO+/Ej3/845m4HADQRGYkPm677bY4evRo/PznP48jR47E1VdfHc8991z09vbOxOUAgCZSqFQqlUYP8e/K5XK0tbXF+Ph4XH755Y0eBwD4HGr5/e3dLgBAKvEBAKQSHwBAKvEBAKQSHwBAKvEBAKQSHwBAKvEBAKQSHwBAqhn5evVzceoLV8vlcoMnAQA+r1O/tz/PF6efd/ExMTERERE9PT0NngQAqNXExES0tbV96jHn3btdPvroozh8+HCUSqUoFAqNHgeoo3K5HD09PTE6OurdTTDLVCqVmJiYiO7u7rjook9/quO8iw9g9vLiSCDCA6cAQDLxAQCkEh9AmmKxGD/72c+iWCw2ehSggTzzAQCkcucDAEglPgCAVOIDAEglPgCAVOIDSLFv375YtWpVdHd3R6FQiKeffrrRIwENIj6AFMePH49rrrkmtm3b1uhRgAY7714sB8xO/f390d/f3+gxgPOAOx8AQCrxAQCkEh8AQCrxAQCkEh8AQCp/2wVIcezYsTh48GB1fWRkJN54442YO3duXHXVVQ2cDMjmrbZAij179sSKFStO275u3bp47LHH8gcCGkZ8AACpPPMBAKQSHwBAKvEBAKQSHwBAKvEBAKQSHwBAKvEBAKQSHwBAKvEBAKQSHwBAKvEBAKQSHwBAqv8HVzGHpq4xVH4AAAAASUVORK5CYII=",
+      "text/plain": [
+       "<Figure size 640x480 with 1 Axes>"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    }
+   ],
+   "source": [
+    "plt.boxplot(ARP_clean['ricetotal_q'])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 18,
+   "id": "60373275",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2024-06-16T10:23:19.022374Z",
+     "start_time": "2024-06-16T10:23:19.011587Z"
+    }
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array([12,  7,  8, 11,  6, 13,  5,  4,  3,  2,  1, 16, 15,  9, 10, 14],\n",
+       "      dtype=int64)"
+      ]
+     },
+     "execution_count": 18,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "ARP_clean['District'].unique()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 19,
+   "id": "37cdeaa5",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2024-06-16T10:23:21.044003Z",
+     "start_time": "2024-06-16T10:23:21.036312Z"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "# Replace values in the 'Sector' column\n",
+    "ARP_clean.loc[:,'Sector'] = ARP_clean['Sector'].replace([1, 2], ['URBAN', 'RURAL'])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 20,
+   "id": "4338bcd0",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2024-06-16T04:29:12.691488Z",
+     "start_time": "2024-06-16T04:29:12.688111Z"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "#total consumption"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 21,
+   "id": "97703b81",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2024-06-16T10:23:35.351538Z",
+     "start_time": "2024-06-16T10:23:35.346912Z"
+    }
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Index(['state_1', 'District', 'Sector', 'Region', 'State_Region',\n",
+       "       'ricetotal_q', 'wheattotal_q', 'moong_q', 'Milktotal_q', 'chicken_q',\n",
+       "       'bread_q', 'foodtotal_q', 'Beveragestotal_v', 'Meals_At_Home'],\n",
+       "      dtype='object')"
+      ]
+     },
+     "execution_count": 21,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "ARP_clean.columns"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 23,
+   "id": "5907b983",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2024-06-16T10:24:00.625661Z",
+     "start_time": "2024-06-16T10:24:00.615361Z"
+    },
+    "scrolled": true
+   },
+   "outputs": [],
+   "source": [
+    "ARP_clean.loc[:, 'total_consumption'] = ARP_clean[['ricetotal_q', 'wheattotal_q', 'moong_q', 'Milktotal_q', 'chicken_q', 'bread_q', 'foodtotal_q', 'Beveragestotal_v']].sum(axis=1)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 24,
+   "id": "08face5f",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2024-06-16T10:24:02.553328Z",
+     "start_time": "2024-06-16T10:24:02.537298Z"
+    }
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>state_1</th>\n",
+       "      <th>District</th>\n",
+       "      <th>Sector</th>\n",
+       "      <th>Region</th>\n",
+       "      <th>State_Region</th>\n",
+       "      <th>ricetotal_q</th>\n",
+       "      <th>wheattotal_q</th>\n",
+       "      <th>moong_q</th>\n",
+       "      <th>Milktotal_q</th>\n",
+       "      <th>chicken_q</th>\n",
+       "      <th>bread_q</th>\n",
+       "      <th>foodtotal_q</th>\n",
+       "      <th>Beveragestotal_v</th>\n",
+       "      <th>Meals_At_Home</th>\n",
+       "      <th>total_consumption</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>34385</th>\n",
+       "      <td>ARP</td>\n",
+       "      <td>12</td>\n",
+       "      <td>RURAL</td>\n",
+       "      <td>1</td>\n",
+       "      <td>121</td>\n",
+       "      <td>7.500000</td>\n",
+       "      <td>0.5</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>0.000000</td>\n",
+       "      <td>0.100000</td>\n",
+       "      <td>21.750400</td>\n",
+       "      <td>0.020</td>\n",
+       "      <td>85.0</td>\n",
+       "      <td>29.870400</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>34386</th>\n",
+       "      <td>ARP</td>\n",
+       "      <td>12</td>\n",
+       "      <td>RURAL</td>\n",
+       "      <td>1</td>\n",
+       "      <td>121</td>\n",
+       "      <td>10.000000</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>1.500000</td>\n",
+       "      <td>0.000000</td>\n",
+       "      <td>24.697650</td>\n",
+       "      <td>20.000</td>\n",
+       "      <td>69.0</td>\n",
+       "      <td>56.197650</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>34387</th>\n",
+       "      <td>ARP</td>\n",
+       "      <td>12</td>\n",
+       "      <td>RURAL</td>\n",
+       "      <td>1</td>\n",
+       "      <td>121</td>\n",
+       "      <td>8.000000</td>\n",
+       "      <td>0.3</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>0.000000</td>\n",
+       "      <td>0.000000</td>\n",
+       "      <td>10.710160</td>\n",
+       "      <td>10.009</td>\n",
+       "      <td>90.0</td>\n",
+       "      <td>29.019160</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>34388</th>\n",
+       "      <td>ARP</td>\n",
+       "      <td>12</td>\n",
+       "      <td>RURAL</td>\n",
+       "      <td>1</td>\n",
+       "      <td>121</td>\n",
+       "      <td>6.000000</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>0.400000</td>\n",
+       "      <td>0.000000</td>\n",
+       "      <td>14.506030</td>\n",
+       "      <td>24.000</td>\n",
+       "      <td>89.0</td>\n",
+       "      <td>44.906030</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>34389</th>\n",
+       "      <td>ARP</td>\n",
+       "      <td>12</td>\n",
+       "      <td>RURAL</td>\n",
+       "      <td>1</td>\n",
+       "      <td>121</td>\n",
+       "      <td>8.333333</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>0.166667</td>\n",
+       "      <td>0.066667</td>\n",
+       "      <td>10.761768</td>\n",
+       "      <td>15.000</td>\n",
+       "      <td>84.0</td>\n",
+       "      <td>34.328435</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "      state_1  District Sector  Region  State_Region  ricetotal_q  \\\n",
+       "34385     ARP        12  RURAL       1           121     7.500000   \n",
+       "34386     ARP        12  RURAL       1           121    10.000000   \n",
+       "34387     ARP        12  RURAL       1           121     8.000000   \n",
+       "34388     ARP        12  RURAL       1           121     6.000000   \n",
+       "34389     ARP        12  RURAL       1           121     8.333333   \n",
+       "\n",
+       "       wheattotal_q  moong_q  Milktotal_q  chicken_q   bread_q  foodtotal_q  \\\n",
+       "34385           0.5      0.0            0   0.000000  0.100000    21.750400   \n",
+       "34386           0.0      0.0            0   1.500000  0.000000    24.697650   \n",
+       "34387           0.3      0.0            0   0.000000  0.000000    10.710160   \n",
+       "34388           0.0      0.0            0   0.400000  0.000000    14.506030   \n",
+       "34389           0.0      0.0            0   0.166667  0.066667    10.761768   \n",
+       "\n",
+       "       Beveragestotal_v  Meals_At_Home  total_consumption  \n",
+       "34385             0.020           85.0          29.870400  \n",
+       "34386            20.000           69.0          56.197650  \n",
+       "34387            10.009           90.0          29.019160  \n",
+       "34388            24.000           89.0          44.906030  \n",
+       "34389            15.000           84.0          34.328435  "
+      ]
+     },
+     "execution_count": 24,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "ARP_clean.head()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 25,
+   "id": "21f5310f",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2024-06-16T10:24:05.914207Z",
+     "start_time": "2024-06-16T10:24:05.880170Z"
+    }
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead tr th {\n",
+       "        text-align: left;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead tr:last-of-type th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr>\n",
+       "      <th></th>\n",
+       "      <th colspan=\"4\" halign=\"left\">total_consumption</th>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th></th>\n",
+       "      <th>std</th>\n",
+       "      <th>mean</th>\n",
+       "      <th>max</th>\n",
+       "      <th>min</th>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>Region</th>\n",
+       "      <th></th>\n",
+       "      <th></th>\n",
+       "      <th></th>\n",
+       "      <th></th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>91.445817</td>\n",
+       "      <td>59.484821</td>\n",
+       "      <td>3420.339508</td>\n",
+       "      <td>0.0</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "       total_consumption                             \n",
+       "                     std       mean          max  min\n",
+       "Region                                               \n",
+       "1              91.445817  59.484821  3420.339508  0.0"
+      ]
+     },
+     "execution_count": 25,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "ARP_clean.groupby('Region').agg({'total_consumption':['std','mean','max','min']})"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 26,
+   "id": "9350a8aa",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2024-06-16T10:24:07.986326Z",
+     "start_time": "2024-06-16T10:24:07.969988Z"
+    }
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead tr th {\n",
+       "        text-align: left;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead tr:last-of-type th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr>\n",
+       "      <th></th>\n",
+       "      <th colspan=\"4\" halign=\"left\">total_consumption</th>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th></th>\n",
+       "      <th>std</th>\n",
+       "      <th>mean</th>\n",
+       "      <th>max</th>\n",
+       "      <th>min</th>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>District</th>\n",
+       "      <th></th>\n",
+       "      <th></th>\n",
+       "      <th></th>\n",
+       "      <th></th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>435.623411</td>\n",
+       "      <td>111.423059</td>\n",
+       "      <td>3420.339508</td>\n",
+       "      <td>13.933492</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>31.725011</td>\n",
+       "      <td>73.643067</td>\n",
+       "      <td>242.500850</td>\n",
+       "      <td>24.350828</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>23.150663</td>\n",
+       "      <td>48.184841</td>\n",
+       "      <td>111.600000</td>\n",
+       "      <td>17.562572</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>52.641050</td>\n",
+       "      <td>80.491732</td>\n",
+       "      <td>449.534325</td>\n",
+       "      <td>20.000000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>5</th>\n",
+       "      <td>34.505721</td>\n",
+       "      <td>53.459701</td>\n",
+       "      <td>194.950900</td>\n",
+       "      <td>16.933340</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>6</th>\n",
+       "      <td>48.799523</td>\n",
+       "      <td>65.126174</td>\n",
+       "      <td>348.252800</td>\n",
+       "      <td>13.250000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>7</th>\n",
+       "      <td>21.726361</td>\n",
+       "      <td>45.748882</td>\n",
+       "      <td>170.271850</td>\n",
+       "      <td>11.200168</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>8</th>\n",
+       "      <td>24.938212</td>\n",
+       "      <td>52.102867</td>\n",
+       "      <td>193.000817</td>\n",
+       "      <td>18.167283</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>9</th>\n",
+       "      <td>29.641908</td>\n",
+       "      <td>57.064516</td>\n",
+       "      <td>120.040425</td>\n",
+       "      <td>17.300040</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>10</th>\n",
+       "      <td>11.690879</td>\n",
+       "      <td>38.564899</td>\n",
+       "      <td>62.000000</td>\n",
+       "      <td>25.600000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>11</th>\n",
+       "      <td>29.676474</td>\n",
+       "      <td>44.058539</td>\n",
+       "      <td>187.734167</td>\n",
+       "      <td>11.800013</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>12</th>\n",
+       "      <td>31.455891</td>\n",
+       "      <td>54.529234</td>\n",
+       "      <td>167.100210</td>\n",
+       "      <td>12.250020</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>13</th>\n",
+       "      <td>26.405895</td>\n",
+       "      <td>46.407693</td>\n",
+       "      <td>244.251425</td>\n",
+       "      <td>13.333400</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>14</th>\n",
+       "      <td>37.013691</td>\n",
+       "      <td>55.185134</td>\n",
+       "      <td>162.696100</td>\n",
+       "      <td>17.785750</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>15</th>\n",
+       "      <td>26.565186</td>\n",
+       "      <td>50.229535</td>\n",
+       "      <td>150.000000</td>\n",
+       "      <td>19.500075</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>16</th>\n",
+       "      <td>32.573233</td>\n",
+       "      <td>58.445307</td>\n",
+       "      <td>226.160538</td>\n",
+       "      <td>0.000000</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "         total_consumption                                    \n",
+       "                       std        mean          max        min\n",
+       "District                                                      \n",
+       "1               435.623411  111.423059  3420.339508  13.933492\n",
+       "2                31.725011   73.643067   242.500850  24.350828\n",
+       "3                23.150663   48.184841   111.600000  17.562572\n",
+       "4                52.641050   80.491732   449.534325  20.000000\n",
+       "5                34.505721   53.459701   194.950900  16.933340\n",
+       "6                48.799523   65.126174   348.252800  13.250000\n",
+       "7                21.726361   45.748882   170.271850  11.200168\n",
+       "8                24.938212   52.102867   193.000817  18.167283\n",
+       "9                29.641908   57.064516   120.040425  17.300040\n",
+       "10               11.690879   38.564899    62.000000  25.600000\n",
+       "11               29.676474   44.058539   187.734167  11.800013\n",
+       "12               31.455891   54.529234   167.100210  12.250020\n",
+       "13               26.405895   46.407693   244.251425  13.333400\n",
+       "14               37.013691   55.185134   162.696100  17.785750\n",
+       "15               26.565186   50.229535   150.000000  19.500075\n",
+       "16               32.573233   58.445307   226.160538   0.000000"
+      ]
+     },
+     "execution_count": 26,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "ARP_clean.groupby('District').agg({'total_consumption':['std','mean','max','min']})"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 27,
+   "id": "e401d915",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2024-06-16T10:24:13.578223Z",
+     "start_time": "2024-06-16T10:24:13.572952Z"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "total_consumption_by_districtcode=ARP_clean.groupby('District')['total_consumption'].sum()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 28,
+   "id": "ad3a96bd",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2024-06-16T10:24:16.346448Z",
+     "start_time": "2024-06-16T10:24:16.338380Z"
+    }
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "District\n",
+       "4    19720.474387\n",
+       "2     8689.881924\n",
+       "8     8180.150097\n",
+       "Name: total_consumption, dtype: float64"
+      ]
+     },
+     "execution_count": 28,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "total_consumption_by_districtcode.sort_values(ascending=False).head(3)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 29,
+   "id": "7202253b",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2024-06-16T10:24:19.340120Z",
+     "start_time": "2024-06-16T10:24:19.333211Z"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "ARP_clean.loc[:,\"District\"] = ARP_clean.loc[:,\"District\"].replace({4: \"Papum Pare\", 2: \"West Kameng\", 8: \"East Siang\"})"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 30,
+   "id": "892eaac3",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2024-06-16T10:24:21.218784Z",
+     "start_time": "2024-06-16T10:24:21.210645Z"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "total_consumption_by_districtname=ARP_clean.groupby('District')['total_consumption'].sum()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 31,
+   "id": "ccd48af2",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2024-06-16T10:24:22.901993Z",
+     "start_time": "2024-06-16T10:24:22.895026Z"
+    }
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "District\n",
+       "Papum Pare     19720.474387\n",
+       "West Kameng     8689.881924\n",
+       "East Siang      8180.150097\n",
+       "Name: total_consumption, dtype: float64"
+      ]
+     },
+     "execution_count": 31,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "total_consumption_by_districtname.sort_values(ascending=False).head(3)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 32,
+   "id": "f34a7ab3",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2024-06-16T10:24:26.024999Z",
+     "start_time": "2024-06-16T10:24:26.002237Z"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "from statsmodels.stats import weightstats as stests"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 33,
+   "id": "7a0f3736",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2024-06-16T10:24:27.312812Z",
+     "start_time": "2024-06-16T10:24:27.303906Z"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "rural=ARP_clean[ARP_clean['Sector']==\"RURAL\"]\n",
+    "urban=ARP_clean[ARP_clean['Sector']==\"URBAN\"]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 34,
+   "id": "ed868d23",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2024-06-16T10:24:28.869178Z",
+     "start_time": "2024-06-16T10:24:28.853238Z"
+    }
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>state_1</th>\n",
+       "      <th>District</th>\n",
+       "      <th>Sector</th>\n",
+       "      <th>Region</th>\n",
+       "      <th>State_Region</th>\n",
+       "      <th>ricetotal_q</th>\n",
+       "      <th>wheattotal_q</th>\n",
+       "      <th>moong_q</th>\n",
+       "      <th>Milktotal_q</th>\n",
+       "      <th>chicken_q</th>\n",
+       "      <th>bread_q</th>\n",
+       "      <th>foodtotal_q</th>\n",
+       "      <th>Beveragestotal_v</th>\n",
+       "      <th>Meals_At_Home</th>\n",
+       "      <th>total_consumption</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>34385</th>\n",
+       "      <td>ARP</td>\n",
+       "      <td>12</td>\n",
+       "      <td>RURAL</td>\n",
+       "      <td>1</td>\n",
+       "      <td>121</td>\n",
+       "      <td>7.500000</td>\n",
+       "      <td>0.5</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>0.000000</td>\n",
+       "      <td>0.100000</td>\n",
+       "      <td>21.750400</td>\n",
+       "      <td>0.020</td>\n",
+       "      <td>85.0</td>\n",
+       "      <td>29.870400</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>34386</th>\n",
+       "      <td>ARP</td>\n",
+       "      <td>12</td>\n",
+       "      <td>RURAL</td>\n",
+       "      <td>1</td>\n",
+       "      <td>121</td>\n",
+       "      <td>10.000000</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>1.500000</td>\n",
+       "      <td>0.000000</td>\n",
+       "      <td>24.697650</td>\n",
+       "      <td>20.000</td>\n",
+       "      <td>69.0</td>\n",
+       "      <td>56.197650</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>34387</th>\n",
+       "      <td>ARP</td>\n",
+       "      <td>12</td>\n",
+       "      <td>RURAL</td>\n",
+       "      <td>1</td>\n",
+       "      <td>121</td>\n",
+       "      <td>8.000000</td>\n",
+       "      <td>0.3</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>0.000000</td>\n",
+       "      <td>0.000000</td>\n",
+       "      <td>10.710160</td>\n",
+       "      <td>10.009</td>\n",
+       "      <td>90.0</td>\n",
+       "      <td>29.019160</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>34388</th>\n",
+       "      <td>ARP</td>\n",
+       "      <td>12</td>\n",
+       "      <td>RURAL</td>\n",
+       "      <td>1</td>\n",
+       "      <td>121</td>\n",
+       "      <td>6.000000</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>0.400000</td>\n",
+       "      <td>0.000000</td>\n",
+       "      <td>14.506030</td>\n",
+       "      <td>24.000</td>\n",
+       "      <td>89.0</td>\n",
+       "      <td>44.906030</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>34389</th>\n",
+       "      <td>ARP</td>\n",
+       "      <td>12</td>\n",
+       "      <td>RURAL</td>\n",
+       "      <td>1</td>\n",
+       "      <td>121</td>\n",
+       "      <td>8.333333</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>0.166667</td>\n",
+       "      <td>0.066667</td>\n",
+       "      <td>10.761768</td>\n",
+       "      <td>15.000</td>\n",
+       "      <td>84.0</td>\n",
+       "      <td>34.328435</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "      state_1 District Sector  Region  State_Region  ricetotal_q  \\\n",
+       "34385     ARP       12  RURAL       1           121     7.500000   \n",
+       "34386     ARP       12  RURAL       1           121    10.000000   \n",
+       "34387     ARP       12  RURAL       1           121     8.000000   \n",
+       "34388     ARP       12  RURAL       1           121     6.000000   \n",
+       "34389     ARP       12  RURAL       1           121     8.333333   \n",
+       "\n",
+       "       wheattotal_q  moong_q  Milktotal_q  chicken_q   bread_q  foodtotal_q  \\\n",
+       "34385           0.5      0.0            0   0.000000  0.100000    21.750400   \n",
+       "34386           0.0      0.0            0   1.500000  0.000000    24.697650   \n",
+       "34387           0.3      0.0            0   0.000000  0.000000    10.710160   \n",
+       "34388           0.0      0.0            0   0.400000  0.000000    14.506030   \n",
+       "34389           0.0      0.0            0   0.166667  0.066667    10.761768   \n",
+       "\n",
+       "       Beveragestotal_v  Meals_At_Home  total_consumption  \n",
+       "34385             0.020           85.0          29.870400  \n",
+       "34386            20.000           69.0          56.197650  \n",
+       "34387            10.009           90.0          29.019160  \n",
+       "34388            24.000           89.0          44.906030  \n",
+       "34389            15.000           84.0          34.328435  "
+      ]
+     },
+     "execution_count": 34,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "rural.head()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 35,
+   "id": "cba3ad77",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2024-06-16T10:24:31.022488Z",
+     "start_time": "2024-06-16T10:24:31.001243Z"
+    }
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>state_1</th>\n",
+       "      <th>District</th>\n",
+       "      <th>Sector</th>\n",
+       "      <th>Region</th>\n",
+       "      <th>State_Region</th>\n",
+       "      <th>ricetotal_q</th>\n",
+       "      <th>wheattotal_q</th>\n",
+       "      <th>moong_q</th>\n",
+       "      <th>Milktotal_q</th>\n",
+       "      <th>chicken_q</th>\n",
+       "      <th>bread_q</th>\n",
+       "      <th>foodtotal_q</th>\n",
+       "      <th>Beveragestotal_v</th>\n",
+       "      <th>Meals_At_Home</th>\n",
+       "      <th>total_consumption</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>52013</th>\n",
+       "      <td>ARP</td>\n",
+       "      <td>16</td>\n",
+       "      <td>URBAN</td>\n",
+       "      <td>1</td>\n",
+       "      <td>121</td>\n",
+       "      <td>11.111111</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0.777778</td>\n",
+       "      <td>0</td>\n",
+       "      <td>0.222222</td>\n",
+       "      <td>0.00000</td>\n",
+       "      <td>21.277889</td>\n",
+       "      <td>0.000000</td>\n",
+       "      <td>90.0</td>\n",
+       "      <td>33.389000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>52014</th>\n",
+       "      <td>ARP</td>\n",
+       "      <td>16</td>\n",
+       "      <td>URBAN</td>\n",
+       "      <td>1</td>\n",
+       "      <td>121</td>\n",
+       "      <td>11.250000</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0.250000</td>\n",
+       "      <td>0</td>\n",
+       "      <td>0.250000</td>\n",
+       "      <td>0.28175</td>\n",
+       "      <td>21.725692</td>\n",
+       "      <td>7.505000</td>\n",
+       "      <td>64.0</td>\n",
+       "      <td>41.262442</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>52015</th>\n",
+       "      <td>ARP</td>\n",
+       "      <td>16</td>\n",
+       "      <td>URBAN</td>\n",
+       "      <td>1</td>\n",
+       "      <td>121</td>\n",
+       "      <td>10.000000</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0.000000</td>\n",
+       "      <td>0</td>\n",
+       "      <td>0.125000</td>\n",
+       "      <td>0.00000</td>\n",
+       "      <td>15.762500</td>\n",
+       "      <td>5.000000</td>\n",
+       "      <td>90.0</td>\n",
+       "      <td>30.887500</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>52016</th>\n",
+       "      <td>ARP</td>\n",
+       "      <td>16</td>\n",
+       "      <td>URBAN</td>\n",
+       "      <td>1</td>\n",
+       "      <td>121</td>\n",
+       "      <td>11.666667</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0.333333</td>\n",
+       "      <td>0</td>\n",
+       "      <td>0.333333</td>\n",
+       "      <td>0.00000</td>\n",
+       "      <td>20.216833</td>\n",
+       "      <td>6.666667</td>\n",
+       "      <td>90.0</td>\n",
+       "      <td>39.216833</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>52017</th>\n",
+       "      <td>ARP</td>\n",
+       "      <td>16</td>\n",
+       "      <td>URBAN</td>\n",
+       "      <td>1</td>\n",
+       "      <td>121</td>\n",
+       "      <td>11.666667</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0.000000</td>\n",
+       "      <td>0</td>\n",
+       "      <td>0.000000</td>\n",
+       "      <td>0.00000</td>\n",
+       "      <td>22.500083</td>\n",
+       "      <td>13.333333</td>\n",
+       "      <td>90.0</td>\n",
+       "      <td>47.500083</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "      state_1 District Sector  Region  State_Region  ricetotal_q  \\\n",
+       "52013     ARP       16  URBAN       1           121    11.111111   \n",
+       "52014     ARP       16  URBAN       1           121    11.250000   \n",
+       "52015     ARP       16  URBAN       1           121    10.000000   \n",
+       "52016     ARP       16  URBAN       1           121    11.666667   \n",
+       "52017     ARP       16  URBAN       1           121    11.666667   \n",
+       "\n",
+       "       wheattotal_q   moong_q  Milktotal_q  chicken_q  bread_q  foodtotal_q  \\\n",
+       "52013           0.0  0.777778            0   0.222222  0.00000    21.277889   \n",
+       "52014           0.0  0.250000            0   0.250000  0.28175    21.725692   \n",
+       "52015           0.0  0.000000            0   0.125000  0.00000    15.762500   \n",
+       "52016           0.0  0.333333            0   0.333333  0.00000    20.216833   \n",
+       "52017           0.0  0.000000            0   0.000000  0.00000    22.500083   \n",
+       "\n",
+       "       Beveragestotal_v  Meals_At_Home  total_consumption  \n",
+       "52013          0.000000           90.0          33.389000  \n",
+       "52014          7.505000           64.0          41.262442  \n",
+       "52015          5.000000           90.0          30.887500  \n",
+       "52016          6.666667           90.0          39.216833  \n",
+       "52017         13.333333           90.0          47.500083  "
+      ]
+     },
+     "execution_count": 35,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "urban.head()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 36,
+   "id": "676b513e",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2024-06-16T10:24:32.527594Z",
+     "start_time": "2024-06-16T10:24:32.524253Z"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "cons_rural=rural['total_consumption']\n",
+    "cons_urban=urban['total_consumption']"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 37,
+   "id": "7e08040d",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2024-06-16T10:24:33.980015Z",
+     "start_time": "2024-06-16T10:24:33.970730Z"
+    }
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Z-Score: 2.305107520256905\n",
+      "P-Value: 0.021160552426127358\n"
+     ]
+    }
+   ],
+   "source": [
+    "z_statistic, p_value = stests.ztest(cons_rural, cons_urban)\n",
+    "# Print the z-score and p-value\n",
+    "print(\"Z-Score:\", z_statistic)\n",
+    "print(\"P-Value:\", p_value)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "3f2245d6-3c7a-44e8-85c6-7caee54467c0",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.11.7"
+  },
+  "varInspector": {
+   "cols": {
+    "lenName": 16,
+    "lenType": 16,
+    "lenVar": 40
+   },
+   "kernels_config": {
+    "python": {
+     "delete_cmd_postfix": "",
+     "delete_cmd_prefix": "del ",
+     "library": "var_list.py",
+     "varRefreshCmd": "print(var_dic_list())"
+    },
+    "r": {
+     "delete_cmd_postfix": ") ",
+     "delete_cmd_prefix": "rm(",
+     "library": "var_list.r",
+     "varRefreshCmd": "cat(var_dic_list()) "
+    }
+   },
+   "types_to_exclude": [
+    "module",
+    "function",
+    "builtin_function_or_method",
+    "instance",
+    "_Feature"
+   ],
+   "window_display": false
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
